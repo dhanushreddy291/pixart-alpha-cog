@@ -1,0 +1,28 @@
+name: build-and-push
+
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  build:
+    runs-on: buildjet-8vcpu-ubuntu-2204	
+    permissions:
+      contents: read
+      packages: write
+      
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3 # This step checkouts the code of the repository
+        
+      - name: Setup Cog
+        uses: replicate/setup-cog@v1
+        with:
+          token: ${{ secrets.REPLICATE_API_TOKEN }}
+
+      - name: Download weights
+        run: cog run script/download-weights
+
+      - name: Push to Replicate
+        run: cog push r8.im/dhanushreddy291/pixart-alpha-xl
