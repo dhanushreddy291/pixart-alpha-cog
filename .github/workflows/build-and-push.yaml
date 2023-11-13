@@ -22,7 +22,9 @@ jobs:
           token: ${{ secrets.REPLICATE_API_TOKEN }}
 
       - name: Download weights
-        run: cog run script/download-weights
+        run: |
+          chmod +x script/download-weights  # Ensure script has execute permissions
+          cog run script/download-weights
 
       - name: Push to Replicate
         run: cog push r8.im/dhanushreddy291/pixart-alpha-xl
