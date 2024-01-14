@@ -1,0 +1,32 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-22.04' # Equivalent to 'buildjet-8vcpu-ubuntu-2204'
+
+jobs:
+- job: Build
+  displayName: 'Build job'
+
+  steps:
+  - checkout: self
+    displayName: 'Checkout code'
+
+  # Equivalent step for 'Setup Cog'. Azure Pipelines might not have a direct equivalent for this, so you might need a script or a task to set it up.
+  - script: |
+      curl -o /usr/local/bin/cog -L https://github.com/replicate/cog/releases/latest/download/cog_`uname -s`_`uname -m`
+      chmod +x /usr/local/bin/cog
+    displayName: 'Setup Cog'
+    env:
+      REPLICATE_API_TOKEN: $(REPLICATE_API_TOKEN) # Assuming you've set this secret in Azure Pipelines
+
+  # Equivalent step for 'Download weights'
+  - script: |
+      chmod +x script/download-weights
+      cog run script/download-weights
+    displayName: 'Download weights'
+
+  # Equivalent step for 'Push to Replicate'
+  - script: |
+      cog push r8.im/dhanushreddy291/pixart-alpha-xl
+    displayName: 'Push to Replicate'
