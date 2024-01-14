@@ -16,6 +16,5 @@ if not os.path.exists(MODEL_CACHE):
 pipe = PixArtAlphaPipeline.from_pretrained(
     MODEL_NAME,
     cache_dir=MODEL_CACHE,
-    torch_dtype=torch.float16,
-    variant="fp16"     
+    torch_dtype=torch.float16    
 )

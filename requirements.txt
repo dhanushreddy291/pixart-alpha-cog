@@ -1,0 +1,6 @@
+torch==2.0.0
+diffusers==0.25.0
+transformers==4.36.2
+accelerate==0.25.0
+sentencepiece==0.1.99
+cog

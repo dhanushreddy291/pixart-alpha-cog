@@ -3,11 +3,11 @@ build:
   gpu: true
   python_version: "3.10"
   python_packages:
-    - "torch"
-    - "diffusers"
-    - "transformers"
-    - "accelerate"
-    - "sentencepiece"
+    - "torch==2.0.0"
+    - "diffusers==0.25.0"
+    - "transformers==4.36.2"
+    - "accelerate==0.25.0"
+    - "sentencepiece==0.1.99"
 
 # predict.py defines how predictions are run on your model
 predict: "predict.py:Predictor"

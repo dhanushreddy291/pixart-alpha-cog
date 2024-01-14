@@ -14,7 +14,6 @@ class Predictor(BasePredictor):
             MODEL_NAME,
             cache_dir=MODEL_CACHE,
             torch_dtype=torch.float16,
-            variant="fp16",
             local_files_only=True, 
         ).to("cuda")
 
@@ -51,7 +50,6 @@ class Predictor(BasePredictor):
         common_args = {
             "prompt": [prompt] * num_outputs,
             "negative_prompt": [negative_prompt] * num_outputs,
-            "guidance_scale": 0,
             "generator": generator,
             "num_inference_steps": num_inference_steps,
         }
